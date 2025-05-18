@@ -19,6 +19,8 @@ int main() {
     const int TORRE_PASSOS = 5;
     const int BISPO_PASSOS = 5;
     const int RAINHA_PASSOS = 8;
+    const int CAVALO_BAIXO = 2;
+    const int CAVALO_ESQUERDA = 1;
     printf("...DESAFIO XADREZ!...\n");
     // 1) Movimento da Torre: 5 casas para a direita usando FOR
     printf("Movimento da Torre:\n");
@@ -46,6 +48,29 @@ int main() {
         printf("Esquerda\n");
         passosRainha++;
     } while (passosRainha < RAINHA_PASSOS);
+
+    printf("\n");
+
+    // 4) Movimento do Cavalo: formar um "L" (duas casas para baixo e uma para a esquerda)
+    printf("Movimento do Cavalo:\n");
+    
+    // Duas casas para baixo: FOR externo e WHILE interno
+    for (int passo = 1; passo <= CAVALO_BAIXO; passo++) {
+        int contador = 0;
+        while (contador < 1) {
+            printf("Baixo\n");
+            contador++;
+        }
+    }
+    
+    // Uma casa para a esquerda: FOR externo e DO-WHILE interno
+    for (int passo = 1; passo <= CAVALO_ESQUERDA; passo++) {
+        int contador = 0;
+        do {
+            printf("Esquerda\n");
+            contador++;
+        } while (contador < 1);
+    }
 
     return 0;
 }
