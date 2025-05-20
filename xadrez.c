@@ -1,77 +1,84 @@
-
-/*
- * Programa: Simulação de Movimentos de Peças de Xadrez
- * Peças: Torre, Bispo e Rainha
- * Autor: [Seu Nome]
- * Descrição: Este programa simula o movimento de três peças de xadrez
- *            utilizando diferentes estruturas de repetição para cada peça.
- *
- * Requisitos:
- *  - Torre: 5 casas para a direita (estrutura for)
- *  - Bispo: 5 casas na diagonal para cima e à direita (estrutura while)
- *  - Rainha: 8 casas para a esquerda (estrutura do-while)
- */
-
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define TOTAL_NUMEROS 15
+#define LIMITE_SUPERIOR 25
+
+// Função para embaralhar os números de 1 a 25
+void embaralhar(int *vetor, int tamanho) {
+    for (int i = tamanho - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int temp = vetor[i];
+        vetor[i] = vetor[j];
+        vetor[j] = temp;
+    }
+}
+
+// Função de comparação para qsort (ordem crescente)
+int comparar(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
+}
+
+// Gera e imprime 15 números únicos em ordem crescente
+void gerarNumeros() {
+    int numeros[LIMITE_SUPERIOR];
+    int selecionados[TOTAL_NUMEROS];
+
+    // Preenche vetor com números de 1 a 25
+    for (int i = 0; i < LIMITE_SUPERIOR; i++) {
+        numeros[i] = i + 1;
+    }
+
+    // Embaralha o vetor
+    embaralhar(numeros, LIMITE_SUPERIOR);
+
+    // Seleciona os 15 primeiros
+    for (int i = 0; i < TOTAL_NUMEROS; i++) {
+        selecionados[i] = numeros[i];
+    }
+
+    // Ordena os 15 números selecionados
+    qsort(selecionados, TOTAL_NUMEROS, sizeof(int), comparar);
+
+    // Imprime os números
+    printf("Numeros gerados: ");
+    for (int i = 0; i < TOTAL_NUMEROS; i++) {
+        printf("%2d ", selecionados[i]);
+    }
+    printf("\n");
+}
 
 int main() {
-    // Número de casas para cada movimento
-    const int TORRE_PASSOS = 5;
-    const int BISPO_PASSOS = 5;
-    const int RAINHA_PASSOS = 8;
-    const int CAVALO_BAIXO = 2;
-    const int CAVALO_ESQUERDA = 1;
-    printf("...DESAFIO XADREZ!...\n");
-    // 1) Movimento da Torre: 5 casas para a direita usando FOR
-    printf("Movimento da Torre:\n");
-    for (int passo = 1; passo <= TORRE_PASSOS; passo++) {
-        // A cada iteração, imprime a direção "Direita"
-        printf("Direita\n");
-    }
-    printf("\n");
+    char tecla;
 
-    // 2) Movimento do Bispo: 5 casas na diagonal (Cima, Direita) usando WHILE
-    printf("Movimento do Bispo:\n");
-    int passosBispo = 0;
-    while (passosBispo < BISPO_PASSOS) {
-        // A cada casa na diagonal, imprime "Cima, Direita"
-        printf("Cima, Direita\n");
-        passosBispo++;
-    }
-    printf("\n");
+    srand(time(NULL));
 
-    // 3) Movimento da Rainha: 8 casas para a esquerda usando DO-WHILE
-    printf("Movimento da Rainha:\n");
-    int passosRainha = 0;
-    do {
-        // A cada iteração, imprime a direção "Esquerda"
-        printf("Esquerda\n");
-        passosRainha++;
-    } while (passosRainha < RAINHA_PASSOS);
+    printf("Pressione ENTER para gerar 15 numeros aleatorios e unicos (1 a 25), em ordem crescente.\n");
+    printf("Digite qualquer outra tecla + ENTER para sair.\n");
 
-    printf("\n");
-
-    // 4) Movimento do Cavalo: formar um "L" (duas casas para baixo e uma para a esquerda)
-    printf("Movimento do Cavalo:\n");
-    
-    // Duas casas para baixo: FOR externo e WHILE interno
-    for (int passo = 1; passo <= CAVALO_BAIXO; passo++) {
-        int contador = 0;
-        while (contador < 1) {
-            printf("Baixo\n");
-            contador++;
+    while (1) {
+        tecla = getchar();
+        if (tecla == '\n') {
+            gerarNumeros();
+        } else {
+            break;
         }
     }
-    
-    // Uma casa para a esquerda: FOR externo e DO-WHILE interno
-    for (int passo = 1; passo <= CAVALO_ESQUERDA; passo++) {
-        int contador = 0;
-        do {
-            printf("Esquerda\n");
-            contador++;
-        } while (contador < 1);
-    }
 
+    printf("Programa encerrado.\n");
     return 0;
 }
+
+
+
+
+
+
+
+
+    
+
+
+
 
